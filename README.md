@@ -1,16 +1,79 @@
 # Quick Start
+
+## Tested on
+
+```sh
+% fastfetch
+morikura@Morikura-MacBook-Pro
+---------------
+OS: macOS Ventura 13.2.1 arm64
+Host: MacBook Pro (14-inch, 2023)
+Kernel: Darwin 22.3.0
+Uptime: 4 days, 47 mins
+Packages: 36 (brew), 483 (macports)
+Shell: zsh 5.8.1
+Display (Color LCD): 3024x1964 @ 120 Hz (as 1512x982) in 14" [Built-in]
+DE: Aqua
+WM: Quartz Compositor
+WM Theme: Multicolor (Dark)
+Font: .AppleSystemUIFont [System], Helvetica [User]
+Cursor: Fill - Black, Outline - White (32px)
+Terminal: Apple Terminal 447
+Terminal Font: Monaco (10pt)
+CPU: Apple M2 Max (12) @ 3.50 GHz
+GPU: Apple M2 Max (30) @ 1.40 GHz [Integrated]
+Memory: 26.78 GiB / 32.00 GiB (84%)
+Swap: Disabled
+Disk (/): 1.60 TiB / 1.81 TiB (88%) - apfs [Read-only]
+```
+
 ## Installation
+
 It's strongly recommended to setup a fresh virtual environment by typing
 
-    virtualenv -p python3 feyn
-    source feyn/bin/activate
-    
-First install numpy with `pip install numpy`.
-The 'aifeynman' package is available on PyPI and can be installed with `pip install aifeynman`.
+```sh
+## Create conda environments
+% conda --version  # check conda installation
+'conda 25.5.1'
+% conda create -n env_aifeynman python=3.10.0  # create conda environments
+% conda activate env_aifeynman # activate conda environments
+
+## Prepare conda environments
+(env_aifeynman)% which python  # check python path
+'<path_to_conda>/envs/env_aifeynman/bin/python'
+(env_aifeynman)% python --version  # check python version
+'Python 3.10.0'
+(env_aifeynman)% conda install conda-forge::gfortran==11.3.0  # install gfortran
+(env_aifeynman)% conda install conda-forge::pytorch  # install pytorch
+
+## clone repo
+(env_aifeynman)% cd ~/git
+(env_aifeynman)% git clone https://github.com/funasoul/AI-Feynman.git
+(env_aifeynman)% cd AI-Feynman
+(env_aifeynman)% python3.10 -m venv feyn
+(env_aifeynman)% source ./feyn/bin/activate
+
+## install!
+## do not execute 'pip install --upgrade pip setuptools'!!
+(feyn)(env_aifeynman)% pip install setuptools==52.0.0 # downgrade setuptools
+(feyn)(env_aifeynman)% pip install numpy
+(feyn)(env_aifeynman)% python setup.py sdist  # install source
+(feyn)(env_aifeynman)% pip install dist/aifeynman-2.0.7.tar.gz  # install aifeynman from source
+
+## test
+(feyn)% python
+```
+
+```ipython
+>>> import aifeynman
+>>> aifeynman.__version__
+'2.0.0'
+```
 
 Note that for now, AI Feynman is supported only for Linux and Mac environments.
 
 ## First example
+
 Move into a clean directory and run the following Python commands:
 
     import aifeynman
@@ -30,7 +93,7 @@ Please check [this Medium article](https://towardsdatascience.com/ai-feynman-2-0
 
 In order to get started, run compile.sh to compile the fortran files used for the brute force code.
 
-ai_feynman_example.py contains an example of running the code on some examples (found in the example_data directory). The examples correspond to the equations I.8.14, I.10.7 and I.50.26 in Table 4 in the paper. More data files on which the code can be tested on can be found in the [Feynman Symbolic Regression Database](https://space.mit.edu/home/tegmark/aifeynman.html). 
+ai_feynman_example.py contains an example of running the code on some examples (found in the example_data directory). The examples correspond to the equations I.8.14, I.10.7 and I.50.26 in Table 4 in the paper. More data files on which the code can be tested on can be found in the [Feynman Symbolic Regression Database](https://space.mit.edu/home/tegmark/aifeynman.html).
 
 The main function of the code, called by the user, has the following parameters:
 
@@ -43,7 +106,7 @@ The main function of the code, called by the user, has the following parameters:
 * vars_name - name of the variables appearing in the equation (inluding the name ofthe output variable). This should be passed as a list of strings, with the name of the variables appearing in the same order as they are in the file containing the data
 * test_percentage - percentage of the input data to be kept aside and used as the test set
 
-The data file to be analyzed should be a text file with each column containing the numerical values of each (dependent and independent) variable. The solution file will be saved in the directory called "results" under the name solution_{filename}. The solution file will contain several rows (corresponding to each point on the Pareto frontier), each row showing: 
+The data file to be analyzed should be a text file with each column containing the numerical values of each (dependent and independent) variable. The solution file will be saved in the directory called "results" under the name solution_{filename}. The solution file will contain several rows (corresponding to each point on the Pareto frontier), each row showing:
 
 * the mean logarithm in based 2 of the error of the discovered equation applied to the input data (this can be though of as the average error in bits)
 * the cummulative logarithm in based 2 of the error of the discovered equation applied to the input data (this can be though of as the cummulative error in bits)
@@ -53,7 +116,7 @@ The data file to be analyzed should be a text file with each column containing t
 
 If test_percentage is different than zero, one more number is added in the beginning of each row, showing the error of the discovered equation on the test set.
 
-ai_feynman_terminal_example.py allows calling the aiFeynman function from the command line. 
+ai_feynman_terminal_example.py allows calling the aiFeynman function from the command line.
 (e.g. python ai_feynman_terminal_example.py --pathdir=../example_data/ --filename=example1.txt). Use python ai_feynman_terminal_example.py --help to display all the available parameters that can be passed to the function.
 
 # Citation

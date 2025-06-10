@@ -50,14 +50,14 @@ It's strongly recommended to setup a fresh virtual environment by typing
 (env_aifeynman)% cd ~/git
 (env_aifeynman)% git clone https://github.com/funasoul/AI-Feynman.git
 (env_aifeynman)% cd AI-Feynman
-(env_aifeynman)% python3.10 -m venv feyn
-(env_aifeynman)% source ./feyn/bin/activate
+(env_aifeynman)% python3.10 -m venv feyn  # create venv
+(env_aifeynman)% source ./feyn/bin/activate  # activate venv
 
 ## install!
 ## do not execute 'pip install --upgrade pip setuptools'!!
 (feyn)(env_aifeynman)% pip install setuptools==52.0.0 # downgrade setuptools
-(feyn)(env_aifeynman)% pip install numpy
-(feyn)(env_aifeynman)% python setup.py sdist  # install source
+(feyn)(env_aifeynman)% pip install numpy  # install numpy
+(feyn)(env_aifeynman)% python setup.py sdist  # install source of aifeynman
 (feyn)(env_aifeynman)% pip install dist/aifeynman-2.0.7.tar.gz  # install aifeynman from source
 
 ## test

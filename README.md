@@ -48,7 +48,7 @@ It's strongly recommended to setup a fresh virtual environment by typing
 
 ## clone repo
 (env_aifeynman)% cd ~/git
-(env_aifeynman)% git clone https://github.com/funasoul/AI-Feynman.git
+(env_aifeynman)% git clone https://github.com/t-morik/AI-Feynman.git
 (env_aifeynman)% cd AI-Feynman
 (env_aifeynman)% python3.10 -m venv feyn  # create venv
 (env_aifeynman)% source ./feyn/bin/activate  # activate venv
